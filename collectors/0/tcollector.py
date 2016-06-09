@@ -121,7 +121,7 @@ def collect_tcollect_stats(processes):
     # (eg when processtats.py is executed from shell)
     tcol_pid = os.getppid()
     tcol_process = Process(tcol_pid)
-    if not "tcollector.py" in " ".join(tcol_process.cmdline):
+    if not "tcollector" in " ".join(tcol_process.cmdline):
         sys.stderr.write("Parent Process %s isn't a tcollector instance\n" %
                 tcol_pid)
         return
