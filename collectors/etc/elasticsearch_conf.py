@@ -12,11 +12,20 @@
 # of the GNU Lesser General Public License along with this program.  If not,
 # see <http://www.gnu.org/licenses/>.
 
+import socket
+
 def get_servers():
   """Get the ElasticSearch servers on this host.
 
   Returns:
     An iterable of tuples of (host, port)
   """
-  return [ ("localhost", 9200) ]
+  return [ _local_server(), _fqdn_server() ]
 
+def _local_server():
+  return ("localhost", 9200)
+
+
+def _fqdn_server():
+  address = socket.gethostbyname(socket.getfqdn())
+  return (address, 9200)
